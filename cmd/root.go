@@ -55,7 +55,7 @@ type userQuery struct {
 }
 
 var rootCmd = &cobra.Command{
-	Use:   "grass",
+	Use:   "gh grass",
 	Short: "Print github grass to console",
 	Long:  "Print github grass to console.",
 	Args:  cobra.ExactArgs(0),
