@@ -19,7 +19,7 @@ var rootCmd = &cobra.Command{
 	Long:  "Print github grass to console.",
 	Args:  cobra.ExactArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		theme, ok := themes[flagTheme]
+		t, ok := themes[flagTheme]
 		if !ok {
 			valid := []string{}
 			for k := range themes {
@@ -36,7 +36,7 @@ var rootCmd = &cobra.Command{
 		for i := 0; i < 7; i++ {
 			for j, w := range cal.Weeks {
 				d := w.ContributionDays[i]
-				c := lipgloss.Color(theme[d.ContributionLevel])
+				c := lipgloss.Color(t[d.ContributionLevel])
 				style := lipgloss.NewStyle().Foreground(c)
 				fmt.Print(style.Render("■"))
 

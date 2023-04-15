@@ -1,6 +1,8 @@
 package cmd
 
-var themes = map[string]map[contributionLevel]string{
+type theme map[contributionLevel]string
+
+var themes = map[string]theme{
 	"dark": {
 		contributionLevelNone:           "#161B22",
 		contributionLevelFirstQuartile:  "#0E4429",
