@@ -18,3 +18,13 @@ var themes = map[string]theme{
 		contributionLevelFourthQuartile: "#216E39",
 	},
 }
+
+func listThemes() []string {
+	ts := []string{}
+
+	for t := range themes {
+		ts = append(ts, t)
+	}
+
+	return ts
+}

@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
@@ -20,11 +21,7 @@ var rootCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		t, ok := themes[flagTheme]
 		if !ok {
-			valid := []string{}
-			for k := range themes {
-				valid = append(valid, k)
-			}
-			return fmt.Errorf("valid themes: %s", valid)
+			return fmt.Errorf("valid themes: %s", listThemes())
 		}
 
 		cal, err := fetchCalendar(flagUser)
@@ -51,5 +48,5 @@ func init() {
 	rootCmd.Flags().SortFlags = false
 
 	rootCmd.Flags().StringVarP(&flagUser, "user", "u", "", "github username")
-	rootCmd.Flags().StringVarP(&flagTheme, "theme", "t", "dark", "grass theme (dark|light)")
+	rootCmd.Flags().StringVarP(&flagTheme, "theme", "t", "dark", fmt.Sprintf("grass theme (%s)", strings.Join(listThemes(), "|")))
 }
