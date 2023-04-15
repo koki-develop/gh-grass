@@ -13,7 +13,7 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-	response := struct {Login string}{}
+	response := struct{ Login string }{}
 	err = client.Get("user", &response)
 	if err != nil {
 		fmt.Println(err)
@@ -21,6 +21,3 @@ func main() {
 	}
 	fmt.Printf("running as %s\n", response.Login)
 }
-
-// For more examples of using go-gh, see:
-// https://github.com/cli/go-gh/blob/trunk/example_gh_test.go
