@@ -59,6 +59,7 @@ var rootCmd = &cobra.Command{
 	Use:   "grass",
 	Short: "Print github grass to console",
 	Long:  "Print github grass to console.",
+	Args:  cobra.ExactArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		client, err := gh.GQLClient(nil)
 		if err != nil {
