@@ -7,7 +7,12 @@ import (
 
 	"github.com/charmbracelet/lipgloss"
 	"github.com/cli/go-gh"
+	graphql "github.com/cli/shurcooL-graphql"
 	"github.com/spf13/cobra"
+)
+
+var (
+	flagUser string
 )
 
 type contributionLevel string
@@ -30,18 +35,24 @@ var themes = map[string]map[contributionLevel]string{
 	},
 }
 
-type viewerQuery struct {
-	Viewer struct {
-		ContributionsCollection struct {
-			ContributionCalendar struct {
-				Weeks []struct {
-					ContributionDays []struct {
-						ContributionLevel contributionLevel
-					}
+type contributions struct {
+	ContributionsCollection struct {
+		ContributionCalendar struct {
+			Weeks []struct {
+				ContributionDays []struct {
+					ContributionLevel contributionLevel
 				}
 			}
 		}
 	}
+}
+
+type viewerQuery struct {
+	Viewer contributions
+}
+
+type userQuery struct {
+	User contributions `graphql:"user(login: $user)"`
 }
 
 var rootCmd = &cobra.Command{
@@ -52,16 +63,26 @@ var rootCmd = &cobra.Command{
 			return err
 		}
 
-		var query viewerQuery
-		if err := client.Query("contributions", &query, nil); err != nil {
-			return err
+		var contributions contributions
+		if flagUser == "" {
+			var query viewerQuery
+			if err := client.Query("contributions", &query, nil); err != nil {
+				return err
+			}
+			contributions = query.Viewer
+		} else {
+			var query userQuery
+			if err := client.Query("contributions", &query, map[string]interface{}{"user": graphql.String(flagUser)}); err != nil {
+				return err
+			}
+			contributions = query.User
 		}
 
 		theme := themes["dark-default"] // TODO: from flag
 
 		for i := 0; i < 7; i++ {
-			chars := make([]string, len(query.Viewer.ContributionsCollection.ContributionCalendar.Weeks))
-			for j, w := range query.Viewer.ContributionsCollection.ContributionCalendar.Weeks {
+			chars := make([]string, len(contributions.ContributionsCollection.ContributionCalendar.Weeks))
+			for j, w := range contributions.ContributionsCollection.ContributionCalendar.Weeks {
 				d := w.ContributionDays[i]
 				c := lipgloss.Color(theme[d.ContributionLevel])
 				style := lipgloss.NewStyle().Foreground(c)
@@ -79,4 +100,10 @@ func Execute() {
 	if err != nil {
 		os.Exit(1)
 	}
+}
+
+func init() {
+	rootCmd.Flags().SortFlags = false
+
+	rootCmd.Flags().StringVarP(&flagUser, "user", "u", "", "github username")
 }
