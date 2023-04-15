@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/charmbracelet/lipgloss"
 	"github.com/spf13/cobra"
 )
 
@@ -33,19 +32,10 @@ var rootCmd = &cobra.Command{
 			return err
 		}
 
-		for i := 0; i < 7; i++ {
-			for j, w := range cal.Weeks {
-				d := w.ContributionDays[i]
-				c := lipgloss.Color(t[d.ContributionLevel])
-				style := lipgloss.NewStyle().Foreground(c)
-				fmt.Print(style.Render("■"))
-
-				if j+1 != len(cal.Weeks) {
-					fmt.Print(" ")
-				}
-			}
-			fmt.Print("\n")
+		if err := printGrass(os.Stdout, t, cal); err != nil {
+			return err
 		}
+
 		return nil
 	},
 }
