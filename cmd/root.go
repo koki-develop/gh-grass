@@ -8,21 +8,34 @@ import (
 	"github.com/spf13/cobra"
 )
 
+type viewerQuery struct {
+	Viewer struct {
+		ContributionsCollection struct {
+			ContributionCalendar struct {
+				Weeks []struct {
+					ContributionDays []struct {
+						Color string
+					}
+				}
+			}
+		}
+	}
+}
+
 var rootCmd = &cobra.Command{
 	Use: "grass",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		fmt.Println("hi world, this is the gh-grass extension!")
-		client, err := gh.RESTClient(nil)
+		client, err := gh.GQLClient(nil)
 		if err != nil {
 			return err
 		}
-		response := struct{ Login string }{}
-		err = client.Get("user", &response)
-		if err != nil {
-			return err
-		}
-		fmt.Printf("running as %s\n", response.Login)
 
+		var query viewerQuery
+		if err := client.Query("contributions", &query, nil); err != nil {
+			return err
+		}
+
+		fmt.Printf("%#v", query)
 		return nil
 	},
 }
