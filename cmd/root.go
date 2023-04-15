@@ -3,7 +3,6 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"strings"
 
 	"github.com/charmbracelet/lipgloss"
 	"github.com/cli/go-gh"
@@ -84,14 +83,16 @@ var rootCmd = &cobra.Command{
 		theme := themes["dark-default"] // TODO: from flag
 
 		for i := 0; i < 7; i++ {
-			chars := make([]string, len(contributions.ContributionsCollection.ContributionCalendar.Weeks))
 			for j, w := range contributions.ContributionsCollection.ContributionCalendar.Weeks {
 				d := w.ContributionDays[i]
 				c := lipgloss.Color(theme[d.ContributionLevel])
 				style := lipgloss.NewStyle().Foreground(c)
-				chars[j] = style.Render("■")
+				fmt.Print(style.Render("■"))
+
+				if j+1 != len(contributions.ContributionsCollection.ContributionCalendar.Weeks) {
+					fmt.Print(" ")
+				}
 			}
-			fmt.Print(strings.Join(chars, " "))
 			fmt.Print("\n")
 		}
 		return nil
