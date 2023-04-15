@@ -11,7 +11,8 @@ import (
 )
 
 var (
-	flagUser string
+	flagUser  string
+	flagTheme string
 )
 
 type contributionLevel string
@@ -80,7 +81,14 @@ var rootCmd = &cobra.Command{
 			contributions = query.User
 		}
 
-		theme := themes["dark-default"] // TODO: from flag
+		theme, ok := themes[flagTheme]
+		if !ok {
+			valid := []string{}
+			for k := range themes {
+				valid = append(valid, k)
+			}
+			return fmt.Errorf("valid themes: %s", valid)
+		}
 
 		for i := 0; i < 7; i++ {
 			for j, w := range contributions.ContributionsCollection.ContributionCalendar.Weeks {
@@ -110,4 +118,5 @@ func init() {
 	rootCmd.Flags().SortFlags = false
 
 	rootCmd.Flags().StringVarP(&flagUser, "user", "u", "", "github username")
+	rootCmd.Flags().StringVarP(&flagTheme, "theme", "t", "dark-default", "grass theme")
 }
