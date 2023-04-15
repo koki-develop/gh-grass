@@ -32,6 +32,7 @@ Usage:
 Flags:
   -u, --user string    github username
   -t, --theme string   grass theme (dark|light) (default "dark")
+      --total          print total contributions
   -h, --help           help for gh
 ```
 
