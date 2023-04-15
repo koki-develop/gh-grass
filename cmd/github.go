@@ -22,7 +22,8 @@ type contributions struct {
 }
 
 type calendar struct {
-	Weeks []struct {
+	TotalContributions int
+	Weeks              []struct {
 		ContributionDays []struct {
 			ContributionLevel contributionLevel
 		}
