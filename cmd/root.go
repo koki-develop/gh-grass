@@ -4,8 +4,19 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/charmbracelet/lipgloss"
 	"github.com/cli/go-gh"
 	"github.com/spf13/cobra"
+)
+
+type contributionLevel string
+
+const (
+	contributionLevelNone           contributionLevel = "NONE"
+	contributionLevelFirstQuartile  contributionLevel = "FIRST_QUARTILE"
+	contributionLevelSecondQuartile contributionLevel = "SECOND_QUARTILE"
+	contributionLevelThirdQuartile  contributionLevel = "THIRD_QUARTILE"
+	contributionLevelFourthQuartile contributionLevel = "FOURTH_QUARTILE"
 )
 
 type viewerQuery struct {
@@ -14,7 +25,7 @@ type viewerQuery struct {
 			ContributionCalendar struct {
 				Weeks []struct {
 					ContributionDays []struct {
-						Color string
+						ContributionLevel contributionLevel
 					}
 				}
 			}
