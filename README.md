@@ -23,6 +23,21 @@ $ gh extension install koki-develop/gh-grass
 ## Usage
 
 ```console
+$ gh grass --help
+Print github grass to console.
+
+Usage:
+  gh grass [flags]
+
+Flags:
+  -u, --user string    github username
+  -t, --theme string   grass theme (dark|light) (default "dark")
+  -h, --help           help for gh
+```
+
+### Basic
+
+```console
 $ gh grass
 ```
 
