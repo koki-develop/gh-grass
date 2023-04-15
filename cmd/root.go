@@ -6,11 +6,14 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
+	"golang.org/x/text/language"
+	"golang.org/x/text/message"
 )
 
 var (
 	flagUser  string
 	flagTheme string
+	flagTotal bool
 )
 
 var rootCmd = &cobra.Command{
@@ -28,6 +31,11 @@ var rootCmd = &cobra.Command{
 		cal, err := fetchCalendar(flagUser)
 		if err != nil {
 			return err
+		}
+
+		if flagTotal {
+			p := message.NewPrinter(language.English)
+			p.Printf("%d contributions in the last year\n", cal.TotalContributions)
 		}
 
 		if err := printGrass(os.Stdout, t, cal); err != nil {
@@ -50,4 +58,5 @@ func init() {
 
 	rootCmd.Flags().StringVarP(&flagUser, "user", "u", "", "github username")
 	rootCmd.Flags().StringVarP(&flagTheme, "theme", "t", "dark", fmt.Sprintf("grass theme (%s)", strings.Join(listThemes(), "|")))
+	rootCmd.Flags().BoolVar(&flagTotal, "total", false, "print total contributions")
 }
