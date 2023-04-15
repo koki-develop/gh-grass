@@ -56,7 +56,9 @@ type userQuery struct {
 }
 
 var rootCmd = &cobra.Command{
-	Use: "grass",
+	Use:   "grass",
+	Short: "Print github grass to console",
+	Long:  "Print github grass to console.",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		client, err := gh.GQLClient(nil)
 		if err != nil {
