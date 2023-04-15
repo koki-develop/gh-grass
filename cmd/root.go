@@ -5,8 +5,6 @@ import (
 	"os"
 
 	"github.com/charmbracelet/lipgloss"
-	"github.com/cli/go-gh"
-	graphql "github.com/cli/shurcooL-graphql"
 	"github.com/spf13/cobra"
 )
 
@@ -15,62 +13,12 @@ var (
 	flagTheme string
 )
 
-type contributionLevel string
-
-const (
-	contributionLevelNone           contributionLevel = "NONE"
-	contributionLevelFirstQuartile  contributionLevel = "FIRST_QUARTILE"
-	contributionLevelSecondQuartile contributionLevel = "SECOND_QUARTILE"
-	contributionLevelThirdQuartile  contributionLevel = "THIRD_QUARTILE"
-	contributionLevelFourthQuartile contributionLevel = "FOURTH_QUARTILE"
-)
-
-type contributions struct {
-	ContributionsCollection struct {
-		ContributionCalendar struct {
-			Weeks []struct {
-				ContributionDays []struct {
-					ContributionLevel contributionLevel
-				}
-			}
-		}
-	}
-}
-
-type viewerQuery struct {
-	Viewer contributions
-}
-
-type userQuery struct {
-	User contributions `graphql:"user(login: $user)"`
-}
-
 var rootCmd = &cobra.Command{
 	Use:   "gh grass",
 	Short: "Print github grass to console",
 	Long:  "Print github grass to console.",
 	Args:  cobra.ExactArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		client, err := gh.GQLClient(nil)
-		if err != nil {
-			return err
-		}
-
-		var contributions contributions
-		if flagUser == "" {
-			var query viewerQuery
-			if err := client.Query("contributions", &query, nil); err != nil {
-				return err
-			}
-			contributions = query.Viewer
-		} else {
-			var query userQuery
-			if err := client.Query("contributions", &query, map[string]interface{}{"user": graphql.String(flagUser)}); err != nil {
-				return err
-			}
-			contributions = query.User
-		}
-
 		theme, ok := themes[flagTheme]
 		if !ok {
 			valid := []string{}
@@ -80,14 +28,19 @@ var rootCmd = &cobra.Command{
 			return fmt.Errorf("valid themes: %s", valid)
 		}
 
+		cal, err := fetchCalendar(flagUser)
+		if err != nil {
+			return err
+		}
+
 		for i := 0; i < 7; i++ {
-			for j, w := range contributions.ContributionsCollection.ContributionCalendar.Weeks {
+			for j, w := range cal.Weeks {
 				d := w.ContributionDays[i]
 				c := lipgloss.Color(theme[d.ContributionLevel])
 				style := lipgloss.NewStyle().Foreground(c)
 				fmt.Print(style.Render("■"))
 
-				if j+1 != len(contributions.ContributionsCollection.ContributionCalendar.Weeks) {
+				if j+1 != len(cal.Weeks) {
 					fmt.Print(" ")
 				}
 			}
