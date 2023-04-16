@@ -16,7 +16,7 @@ Grow github grass to console.
 
 ## Installation
 
-```console
+```sh
 $ gh extension install koki-develop/gh-grass
 ```
 
@@ -32,13 +32,14 @@ Usage:
 Flags:
   -u, --user string    github username
   -t, --theme string   grass theme (dark|light) (default "dark")
+  -g, --grass string   grass string (default "■")
       --total          print total contributions
   -h, --help           help for gh
 ```
 
 ### Basic
 
-```console
+```sh
 $ gh grass
 ```
 
@@ -46,13 +47,41 @@ $ gh grass
 
 ### Specify a User
 
-You can specify a user with the `-u` or `--user` flag.
-
-```console
+```sh
 $ gh grass --user <USERNAME>
+# e.g.
+$ gh grass --user koki-develop
 ```
 
 ![](./docs/user.gif)
+
+### Change Theme
+
+```sh
+$ gh grass --theme <dark or light>
+# e.g.
+$ gh grass --theme light
+```
+
+![](./docs/theme.gif)
+
+### Print Total Contributions
+
+```sh
+$ gh grass --total
+```
+
+![](./docs/total.gif)
+
+### Custom Grass
+
+```sh
+$ gh grass --grass "<GRASS STRING>"
+# e.g.
+$ gh grass --grass "●"
+```
+
+![](./docs/grass.gif)
 
 ## LICENSE
 
