@@ -13,6 +13,7 @@ import (
 var (
 	flagUser  string
 	flagTheme string
+	flagGrass string
 	flagTotal bool
 )
 
@@ -38,7 +39,7 @@ var rootCmd = &cobra.Command{
 			p.Printf("%d contributions in the last year\n", cal.TotalContributions)
 		}
 
-		if err := printGrass(os.Stdout, t, cal); err != nil {
+		if err := printGrass(os.Stdout, printOptions{theme: t, calendar: cal, grass: flagGrass}); err != nil {
 			return err
 		}
 
@@ -57,6 +58,8 @@ func init() {
 	rootCmd.Flags().SortFlags = false
 
 	rootCmd.Flags().StringVarP(&flagUser, "user", "u", "", "github username")
+
 	rootCmd.Flags().StringVarP(&flagTheme, "theme", "t", "dark", fmt.Sprintf("grass theme (%s)", strings.Join(listThemes(), "|")))
+	rootCmd.Flags().StringVarP(&flagGrass, "grass", "g", "■", "grass string")
 	rootCmd.Flags().BoolVar(&flagTotal, "total", false, "print total contributions")
 }
