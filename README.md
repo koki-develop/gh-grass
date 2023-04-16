@@ -6,7 +6,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/koki-develop/gh-grass)](https://goreportcard.com/report/github.com/koki-develop/gh-grass)
 [![LICENSE](https://img.shields.io/github/license/koki-develop/gh-grass)](./LICENSE)
 
-sleep command with rich progress bar.
+Grow github grass to console.
 
 ![demo](./docs/demo.gif)
 
@@ -24,7 +24,7 @@ $ gh extension install koki-develop/gh-grass
 
 ```console
 $ gh grass --help
-Print github grass to console.
+Grow github grass to console.
 
 Usage:
   gh grass [flags]

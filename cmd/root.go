@@ -18,8 +18,8 @@ var (
 
 var rootCmd = &cobra.Command{
 	Use:          "gh grass",
-	Short:        "Print github grass to console",
-	Long:         "Print github grass to console.",
+	Short:        "Grow github grass to console",
+	Long:         "Grow github grass to console.",
 	Args:         cobra.ExactArgs(0),
 	SilenceUsage: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
