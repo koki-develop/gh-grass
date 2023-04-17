@@ -1,14 +1,25 @@
-# gh-grass
+<p align="center">
+<img src="./assets/logo-light.svg#gh-light-mode-only" />
+<img src="./assets/logo-dark.svg#gh-dark-mode-only" />
+</p>
 
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/koki-develop/gh-grass)](https://github.com/koki-develop/gh-grass/releases/latest)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/koki-develop/gh-grass/ci.yml?logo=github)](https://github.com/koki-develop/gh-grass/actions/workflows/ci.yml)
-[![Maintainability](https://img.shields.io/codeclimate/maintainability/koki-develop/gh-grass?style=flat&logo=codeclimate)](https://codeclimate.com/github/koki-develop/gh-grass/maintainability)
-[![Go Report Card](https://goreportcard.com/badge/github.com/koki-develop/gh-grass)](https://goreportcard.com/report/github.com/koki-develop/gh-grass)
-[![LICENSE](https://img.shields.io/github/license/koki-develop/gh-grass)](./LICENSE)
+<p align="center">
+<a href="https://github.com/koki-develop/gh-grass/releases/latest"><img src="https://img.shields.io/github/v/release/koki-develop/gh-grass" alt="GitHub release (latest by date)"></a>
+<a href="https://github.com/koki-develop/gh-grass/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/koki-develop/gh-grass/ci.yml?logo=github" alt="GitHub Workflow Status"></a>
+<a href="https://codeclimate.com/github/koki-develop/gh-grass/maintainability"><img src="https://img.shields.io/codeclimate/maintainability/koki-develop/gh-grass?style=flat&amp;logo=codeclimate" alt="Maintainability"></a>
+<a href="https://goreportcard.com/report/github.com/koki-develop/gh-grass"><img src="https://goreportcard.com/badge/github.com/koki-develop/gh-grass" alt="Go Report Card"></a>
+<a href="./LICENSE"><img src="https://img.shields.io/github/license/koki-develop/gh-grass" alt="LICENSE"></a>
+</p>
 
+<p align="center">
 Grow github grass to console.
+</p>
 
-![demo](./assets/demo.gif)
+<p align="center">
+<img src="./assets/demo.gif" alt="demo">
+</p>
+
+# gh-grass
 
 - [Installation](#installation)
 - [Usage](#usage)
