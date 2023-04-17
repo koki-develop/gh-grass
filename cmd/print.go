@@ -14,30 +14,35 @@ type printOptions struct {
 }
 
 func printGrass(w io.Writer, options printOptions) error {
-	for i := 0; i < 7; i++ {
-		for j, week := range options.calendar.Weeks {
-			if len(week.ContributionDays) < i+1 {
-				continue
-			}
+	grasses := []string{}
 
-			d := week.ContributionDays[i]
+	for _, week := range options.calendar.Weeks {
+		for _, d := range week.ContributionDays {
 			c := lipgloss.Color(options.theme[d.ContributionLevel])
 			style := lipgloss.NewStyle().Foreground(c)
-
-			if _, err := fmt.Fprint(w, style.Render(options.grass)); err != nil {
-				return err
-			}
-
-			if j+1 != len(options.calendar.Weeks) {
-				if _, err := fmt.Fprint(w, " "); err != nil {
-					return err
-				}
-			}
-		}
-		if _, err := fmt.Fprint(w, "\n"); err != nil {
-			return err
+			grasses = append(grasses, style.Render(options.grass))
 		}
 	}
+
+	rows := 7
+	columns := (len(grasses) + rows - 1) / rows
+
+	for i := 0; i < rows; i++ {
+		for j := 0; j < columns; j++ {
+			index := j*rows + i
+			if index < len(grasses) {
+				if j != 0 {
+					fmt.Fprint(w, " ")
+				}
+				fmt.Fprint(w, grasses[index])
+			}
+		}
+		if i < rows-1 && i < len(grasses)-1 {
+			fmt.Fprintln(w)
+		}
+	}
+
+	fmt.Fprintln(w)
 
 	return nil
 }
