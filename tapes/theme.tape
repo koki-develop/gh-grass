@@ -1,4 +1,4 @@
-Output docs/theme.gif
+Output assets/theme.gif
 
 Require gh
 

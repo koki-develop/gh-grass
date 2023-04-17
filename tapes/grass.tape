@@ -1,4 +1,4 @@
-Output docs/grass.gif
+Output assets/grass.gif
 
 Require gh
 

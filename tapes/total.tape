@@ -1,4 +1,4 @@
-Output docs/total.gif
+Output assets/total.gif
 
 Require gh
 

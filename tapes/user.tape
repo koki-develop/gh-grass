@@ -1,4 +1,4 @@
-Output docs/user.gif
+Output assets/user.gif
 
 Require gh
 

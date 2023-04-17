@@ -8,7 +8,7 @@
 
 Grow github grass to console.
 
-![demo](./docs/demo.gif)
+![demo](./assets/demo.gif)
 
 - [Installation](#installation)
 - [Usage](#usage)
@@ -43,7 +43,7 @@ Flags:
 $ gh grass
 ```
 
-![demo](./docs/demo.gif)
+![demo](./assets/demo.gif)
 
 ### Specify a User
 
@@ -53,7 +53,7 @@ $ gh grass --user <USERNAME>
 $ gh grass --user koki-develop
 ```
 
-![](./docs/user.gif)
+![](./assets/user.gif)
 
 ### Change Theme
 
@@ -63,7 +63,7 @@ $ gh grass --theme <dark or light>
 $ gh grass --theme light
 ```
 
-![](./docs/theme.gif)
+![](./assets/theme.gif)
 
 ### Print Total Contributions
 
@@ -71,7 +71,7 @@ $ gh grass --theme light
 $ gh grass --total
 ```
 
-![](./docs/total.gif)
+![](./assets/total.gif)
 
 ### Custom Grass
 
@@ -81,7 +81,7 @@ $ gh grass --grass "<GRASS STRING>"
 $ gh grass --grass "●"
 ```
 
-![](./docs/grass.gif)
+![](./assets/grass.gif)
 
 ## LICENSE
 
