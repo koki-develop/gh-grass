@@ -33,22 +33,25 @@ var rootCmd = &cobra.Command{
 		}
 
 		params := fetchCalendarParameters{}
+		// --user
 		if flagUser != "" {
 			params.User = &flagUser
 		}
+		// --from
 		if flagFrom != "" {
 			t, err := now.Parse(flagFrom)
 			if err != nil {
 				return err
 			}
-			params.To = &t
+			params.From = &t
 		}
+		// --to
 		if flagTo != "" {
 			f, err := now.Parse(flagTo)
 			if err != nil {
 				return err
 			}
-			params.From = &f
+			params.To = &f
 		}
 
 		cal, err := fetchCalendar(params)
