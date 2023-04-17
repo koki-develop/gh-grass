@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"time"
+
 	"github.com/cli/go-gh"
 	graphql "github.com/cli/shurcooL-graphql"
 )
@@ -40,6 +42,8 @@ type userQuery struct {
 
 type fetchCalendarParameters struct {
 	User *string
+	From *time.Time
+	To   *time.Time
 }
 
 func fetchCalendar(params fetchCalendarParameters) (calendar, error) {

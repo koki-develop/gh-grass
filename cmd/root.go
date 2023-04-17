@@ -5,6 +5,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/jinzhu/now"
 	"github.com/spf13/cobra"
 	"golang.org/x/text/language"
 	"golang.org/x/text/message"
@@ -12,6 +13,8 @@ import (
 
 var (
 	flagUser  string
+	flagFrom  string
+	flagTo    string
 	flagTheme string
 	flagGrass string
 	flagTotal bool
@@ -32,6 +35,20 @@ var rootCmd = &cobra.Command{
 		params := fetchCalendarParameters{}
 		if flagUser != "" {
 			params.User = &flagUser
+		}
+		if flagFrom != "" {
+			t, err := now.Parse(flagFrom)
+			if err != nil {
+				return err
+			}
+			params.To = &t
+		}
+		if flagTo != "" {
+			f, err := now.Parse(flagTo)
+			if err != nil {
+				return err
+			}
+			params.From = &f
 		}
 
 		cal, err := fetchCalendar(params)
@@ -63,6 +80,8 @@ func init() {
 	rootCmd.Flags().SortFlags = false
 
 	rootCmd.Flags().StringVarP(&flagUser, "user", "u", "", "github username")
+	rootCmd.Flags().StringVar(&flagFrom, "from", "", "only contributions made at this time or later will be counted")
+	rootCmd.Flags().StringVar(&flagTo, "to", "", "only contributions made before and up to (including) this time will be counted")
 
 	rootCmd.Flags().StringVarP(&flagTheme, "theme", "t", "dark", fmt.Sprintf("grass theme (%s)", strings.Join(listThemes(), "|")))
 	rootCmd.Flags().StringVarP(&flagGrass, "grass", "g", "■", "grass string")

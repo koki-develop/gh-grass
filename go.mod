@@ -6,6 +6,7 @@ require (
 	github.com/charmbracelet/lipgloss v0.7.1
 	github.com/cli/go-gh v1.2.1
 	github.com/cli/shurcooL-graphql v0.0.3
+	github.com/jinzhu/now v1.1.5
 	github.com/spf13/cobra v1.7.0
 	golang.org/x/text v0.9.0
 )
