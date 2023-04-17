@@ -29,7 +29,12 @@ var rootCmd = &cobra.Command{
 			return fmt.Errorf("valid themes: %s", listThemes())
 		}
 
-		cal, err := fetchCalendar(flagUser)
+		params := fetchCalendarParameters{}
+		if flagUser != "" {
+			params.User = &flagUser
+		}
+
+		cal, err := fetchCalendar(params)
 		if err != nil {
 			return err
 		}

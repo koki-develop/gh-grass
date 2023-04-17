@@ -38,21 +38,30 @@ type userQuery struct {
 	User contributions `graphql:"user(login: $user)"`
 }
 
-func fetchCalendar(username string) (calendar, error) {
+type fetchCalendarParameters struct {
+	User *string
+}
+
+func fetchCalendar(params fetchCalendarParameters) (calendar, error) {
 	client, err := gh.GQLClient(nil)
 	if err != nil {
 		return calendar{}, err
 	}
 
-	if flagUser == "" {
+	v := map[string]interface{}{}
+	if params.User != nil {
+		v["user"] = graphql.String(*params.User)
+	}
+
+	if params.User == nil {
 		var query viewerQuery
-		if err := client.Query("contributions", &query, nil); err != nil {
+		if err := client.Query("contributions", &query, v); err != nil {
 			return calendar{}, err
 		}
 		return query.Viewer.ContributionsCollection.ContributionCalendar, nil
 	} else {
 		var query userQuery
-		if err := client.Query("contributions", &query, map[string]interface{}{"user": graphql.String(username)}); err != nil {
+		if err := client.Query("contributions", &query, v); err != nil {
 			return calendar{}, err
 		}
 		return query.User.ContributionsCollection.ContributionCalendar, nil
