@@ -15,10 +15,6 @@
 Grow github grass to console.
 </p>
 
-<p align="center">
-<img src="./assets/demo.gif" alt="demo">
-</p>
-
 # gh-grass
 
 - [Installation](#installation)
