@@ -27,7 +27,12 @@ var rootCmd = &cobra.Command{
 	Args:         cobra.ExactArgs(0),
 	SilenceUsage: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		t, ok := themes[flagTheme]
+		themeName := getEnvOr("GH_GRASS_THEME", flagTheme)
+		if cmd.Flag("theme").Changed {
+			themeName = flagTheme
+		}
+
+		t, ok := themes[themeName]
 		if !ok {
 			return fmt.Errorf("valid themes: %s", listThemes())
 		}
