@@ -1,4 +1,4 @@
-Output assets/demo.gif
+Output assets/period.gif
 
 Require gh
 
@@ -17,6 +17,6 @@ Ctrl+l
 Sleep 3s
 Show
 
-Type "gh grass" Sleep 500ms Enter
+Type 'gh grass --from "2023-03-01" --to "2023-03-31"' Sleep 500ms Enter
 
 Sleep 5s

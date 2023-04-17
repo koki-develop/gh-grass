@@ -62,6 +62,16 @@ $ gh grass --user koki-develop
 
 ![](./assets/user.gif)
 
+### Specify Time Period
+
+```sh
+$ gh grass --from "<yyyy-MM-dd>"
+$ gh grass --to "<yyyy-MM-dd>"
+$ gh grass --from "<yyyy-MM-dd>" --to "<yyyy-MM-dd>"
+```
+
+![](./assets/period.gif)
+
 ### Change Theme
 
 ```sh
