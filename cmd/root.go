@@ -5,6 +5,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/koki-develop/gh-grass/internal/github"
 	"github.com/koki-develop/gh-grass/internal/util"
 
 	"github.com/jinzhu/now"
@@ -39,7 +40,7 @@ var rootCmd = &cobra.Command{
 			return fmt.Errorf("valid themes: %s", listThemes())
 		}
 
-		params := fetchCalendarParameters{}
+		params := github.FetchCalendarParameters{}
 		// --user
 		if flagUser != "" {
 			params.User = &flagUser
@@ -61,7 +62,7 @@ var rootCmd = &cobra.Command{
 			params.To = &f
 		}
 
-		cal, err := fetchCalendar(params)
+		cal, err := github.FetchCalendar(params)
 		if err != nil {
 			return err
 		}

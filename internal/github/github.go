@@ -1,4 +1,4 @@
-package cmd
+package github
 
 import (
 	"time"
@@ -7,39 +7,39 @@ import (
 	graphql "github.com/cli/shurcooL-graphql"
 )
 
-type contributionLevel string
+type ContributionLevel string
 
 const (
-	contributionLevelNone           contributionLevel = "NONE"
-	contributionLevelFirstQuartile  contributionLevel = "FIRST_QUARTILE"
-	contributionLevelSecondQuartile contributionLevel = "SECOND_QUARTILE"
-	contributionLevelThirdQuartile  contributionLevel = "THIRD_QUARTILE"
-	contributionLevelFourthQuartile contributionLevel = "FOURTH_QUARTILE"
+	ContributionLevelNone           ContributionLevel = "NONE"
+	ContributionLevelFirstQuartile  ContributionLevel = "FIRST_QUARTILE"
+	ContributionLevelSecondQuartile ContributionLevel = "SECOND_QUARTILE"
+	ContributionLevelThirdQuartile  ContributionLevel = "THIRD_QUARTILE"
+	ContributionLevelFourthQuartile ContributionLevel = "FOURTH_QUARTILE"
 )
 
 type DateTime struct {
 	time.Time
 }
 
-type calendar struct {
+type Calendar struct {
 	TotalContributions int
 	Weeks              []struct {
 		ContributionDays []struct {
-			ContributionLevel contributionLevel
+			ContributionLevel ContributionLevel
 		}
 	}
 }
 
-type fetchCalendarParameters struct {
+type FetchCalendarParameters struct {
 	User *string
 	From *time.Time
 	To   *time.Time
 }
 
-func fetchCalendar(params fetchCalendarParameters) (calendar, error) {
+func FetchCalendar(params FetchCalendarParameters) (Calendar, error) {
 	client, err := gh.GQLClient(nil)
 	if err != nil {
-		return calendar{}, err
+		return Calendar{}, err
 	}
 
 	v := map[string]interface{}{}
@@ -53,14 +53,14 @@ func fetchCalendar(params fetchCalendarParameters) (calendar, error) {
 		v["to"] = DateTime{*params.To}
 	}
 
-	var cal calendar
+	var cal Calendar
 
 	switch {
 	case params.User != nil && params.From != nil && params.To != nil:
 		var q struct {
 			User struct {
 				ContributionsCollection struct {
-					ContributionCalendar calendar
+					ContributionCalendar Calendar
 				} `graphql:"contributionsCollection(from: $from, to: $to)"`
 			} `graphql:"user(login: $user)"`
 		}
@@ -70,7 +70,7 @@ func fetchCalendar(params fetchCalendarParameters) (calendar, error) {
 		var q struct {
 			User struct {
 				ContributionsCollection struct {
-					ContributionCalendar calendar
+					ContributionCalendar Calendar
 				} `graphql:"contributionsCollection(from: $from)"`
 			} `graphql:"user(login: $user)"`
 		}
@@ -80,7 +80,7 @@ func fetchCalendar(params fetchCalendarParameters) (calendar, error) {
 		var q struct {
 			User struct {
 				ContributionsCollection struct {
-					ContributionCalendar calendar
+					ContributionCalendar Calendar
 				} `graphql:"contributionsCollection(to: $to)"`
 			} `graphql:"user(login: $user)"`
 		}
@@ -90,7 +90,7 @@ func fetchCalendar(params fetchCalendarParameters) (calendar, error) {
 		var q struct {
 			User struct {
 				ContributionsCollection struct {
-					ContributionCalendar calendar
+					ContributionCalendar Calendar
 				}
 			} `graphql:"user(login: $user)"`
 		}
@@ -100,7 +100,7 @@ func fetchCalendar(params fetchCalendarParameters) (calendar, error) {
 		var q struct {
 			Viewer struct {
 				ContributionsCollection struct {
-					ContributionCalendar calendar
+					ContributionCalendar Calendar
 				} `graphql:"contributionsCollection(from: $from, to: $to)"`
 			}
 		}
@@ -110,7 +110,7 @@ func fetchCalendar(params fetchCalendarParameters) (calendar, error) {
 		var q struct {
 			Viewer struct {
 				ContributionsCollection struct {
-					ContributionCalendar calendar
+					ContributionCalendar Calendar
 				} `graphql:"contributionsCollection(from: $from)"`
 			}
 		}
@@ -120,7 +120,7 @@ func fetchCalendar(params fetchCalendarParameters) (calendar, error) {
 		var q struct {
 			Viewer struct {
 				ContributionsCollection struct {
-					ContributionCalendar calendar
+					ContributionCalendar Calendar
 				} `graphql:"contributionsCollection(to: $to)"`
 			}
 		}
@@ -130,7 +130,7 @@ func fetchCalendar(params fetchCalendarParameters) (calendar, error) {
 		var q struct {
 			Viewer struct {
 				ContributionsCollection struct {
-					ContributionCalendar calendar
+					ContributionCalendar Calendar
 				}
 			}
 		}

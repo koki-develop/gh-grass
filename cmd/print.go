@@ -5,11 +5,12 @@ import (
 	"io"
 
 	"github.com/charmbracelet/lipgloss"
+	"github.com/koki-develop/gh-grass/internal/github"
 )
 
 type printOptions struct {
 	theme    theme
-	calendar calendar
+	calendar github.Calendar
 	grass    string
 }
 
