@@ -1,8 +1,8 @@
-package cmd
+package util
 
 import "os"
 
-func getEnvOr(name, value string) string {
+func GetEnvOr(name, value string) string {
 	v := os.Getenv(name)
 	if v == "" {
 		return value

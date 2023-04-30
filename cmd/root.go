@@ -5,6 +5,8 @@ import (
 	"os"
 	"strings"
 
+	"github.com/koki-develop/gh-grass/internal/util"
+
 	"github.com/jinzhu/now"
 	"github.com/spf13/cobra"
 	"golang.org/x/text/language"
@@ -27,7 +29,7 @@ var rootCmd = &cobra.Command{
 	Args:         cobra.ExactArgs(0),
 	SilenceUsage: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		themeName := getEnvOr("GH_GRASS_THEME", flagTheme)
+		themeName := util.GetEnvOr("GH_GRASS_THEME", flagTheme)
 		if cmd.Flag("theme").Changed {
 			themeName = flagTheme
 		}
