@@ -95,6 +95,12 @@ $ gh grass --grass "●"
 
 ![](./assets/grass.gif)
 
+### Animation
+
+```sh
+$ gh grass --animate
+```
+
 ### Print Total Contributions
 
 ```sh
