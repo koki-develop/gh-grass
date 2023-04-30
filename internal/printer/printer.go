@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 
+	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 	"github.com/koki-develop/gh-grass/internal/github"
 )
@@ -45,6 +46,22 @@ func (p *Printer) Print(w io.Writer, calendar github.Calendar) error {
 		}
 	}
 
+	if p.animate {
+		m := newModel(grasses)
+		p := tea.NewProgram(m, tea.WithOutput(w))
+		if _, err := p.Run(); err != nil {
+			return err
+		}
+	} else {
+		if err := p.print(w, grasses); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (p *Printer) print(w io.Writer, grasses []string) error {
 	rows := 7
 	columns := (len(grasses) + rows - 1) / rows
 
@@ -53,17 +70,25 @@ func (p *Printer) Print(w io.Writer, calendar github.Calendar) error {
 			index := j*rows + i
 			if index < len(grasses) {
 				if j != 0 {
-					fmt.Fprint(w, " ")
+					if _, err := fmt.Fprint(w, " "); err != nil {
+						return err
+					}
 				}
-				fmt.Fprint(w, grasses[index])
+				if _, err := fmt.Fprint(w, grasses[index]); err != nil {
+					return err
+				}
 			}
 		}
 		if i < rows-1 && i < len(grasses)-1 {
-			fmt.Fprintln(w)
+			if _, err := fmt.Fprintln(w); err != nil {
+				return err
+			}
 		}
 	}
 
-	fmt.Fprintln(w)
+	if _, err := fmt.Fprintln(w); err != nil {
+		return err
+	}
 
 	return nil
 }
