@@ -38,8 +38,11 @@ Usage:
 
 Flags:
   -u, --user string    github username
+      --from string    only contributions made at this time or later will be counted
+      --to string      only contributions made before and up to (including) this time will be counted
   -t, --theme string   grass theme (dark|light) (default "dark")
   -g, --grass string   grass string (default "■")
+  -a, --animate        animate grass
       --total          print total contributions
   -h, --help           help for gh
 ```
