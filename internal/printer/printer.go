@@ -43,7 +43,7 @@ func (p *Printer) Print(w io.Writer, calendar github.Calendar) error {
 	for _, week := range calendar.Weeks {
 		for _, d := range week.ContributionDays {
 			c := lipgloss.Color(p.theme[d.ContributionLevel])
-			style := lipgloss.NewStyle().Foreground(c)
+			style := lipgloss.NewStyle().Foreground(c).Bold(true)
 			grasses = append(grasses, style.Render(p.grass))
 		}
 	}
