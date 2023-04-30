@@ -3,6 +3,7 @@ package printer
 import (
 	"fmt"
 	"io"
+	"os"
 	"strings"
 
 	tea "github.com/charmbracelet/bubbletea"
@@ -49,7 +50,7 @@ func (p *Printer) Print(w io.Writer, calendar github.Calendar) error {
 
 	if p.animate {
 		m := newModel(p, grasses)
-		p := tea.NewProgram(m, tea.WithOutput(w))
+		p := tea.NewProgram(m, tea.WithOutput(os.Stderr))
 		if _, err := p.Run(); err != nil {
 			return err
 		}
