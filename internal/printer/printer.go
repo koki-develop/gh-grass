@@ -1,4 +1,4 @@
-package cmd
+package printer
 
 import (
 	"fmt"
@@ -8,20 +8,20 @@ import (
 	"github.com/koki-develop/gh-grass/internal/github"
 )
 
-type printOptions struct {
-	theme    theme
-	calendar github.Calendar
-	grass    string
+type PrintOptions struct {
+	Theme    Theme
+	Calendar github.Calendar
+	Grass    string
 }
 
-func printGrass(w io.Writer, options printOptions) error {
+func PrintGrass(w io.Writer, options PrintOptions) error {
 	grasses := []string{}
 
-	for _, week := range options.calendar.Weeks {
+	for _, week := range options.Calendar.Weeks {
 		for _, d := range week.ContributionDays {
-			c := lipgloss.Color(options.theme[d.ContributionLevel])
+			c := lipgloss.Color(options.Theme[d.ContributionLevel])
 			style := lipgloss.NewStyle().Foreground(c)
-			grasses = append(grasses, style.Render(options.grass))
+			grasses = append(grasses, style.Render(options.Grass))
 		}
 	}
 

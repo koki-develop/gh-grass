@@ -1,10 +1,10 @@
-package cmd
+package printer
 
 import "github.com/koki-develop/gh-grass/internal/github"
 
-type theme map[github.ContributionLevel]string
+type Theme map[github.ContributionLevel]string
 
-var themes = map[string]theme{
+var Themes = map[string]Theme{
 	"dark": {
 		github.ContributionLevelNone:           "#161B22",
 		github.ContributionLevelFirstQuartile:  "#0E4429",
@@ -21,10 +21,10 @@ var themes = map[string]theme{
 	},
 }
 
-func listThemes() []string {
+func ListThemes() []string {
 	ts := []string{}
 
-	for t := range themes {
+	for t := range Themes {
 		ts = append(ts, t)
 	}
 

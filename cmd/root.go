@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/koki-develop/gh-grass/internal/github"
+	"github.com/koki-develop/gh-grass/internal/printer"
 	"github.com/koki-develop/gh-grass/internal/util"
 
 	"github.com/jinzhu/now"
@@ -35,9 +36,9 @@ var rootCmd = &cobra.Command{
 			themeName = flagTheme
 		}
 
-		t, ok := themes[themeName]
+		t, ok := printer.Themes[themeName]
 		if !ok {
-			return fmt.Errorf("valid themes: %s", listThemes())
+			return fmt.Errorf("valid themes: %s", printer.ListThemes())
 		}
 
 		params := github.FetchCalendarParameters{}
@@ -72,7 +73,7 @@ var rootCmd = &cobra.Command{
 			p.Printf("%d contributions in the last year\n", cal.TotalContributions)
 		}
 
-		if err := printGrass(os.Stdout, printOptions{theme: t, calendar: cal, grass: flagGrass}); err != nil {
+		if err := printer.PrintGrass(os.Stdout, printer.PrintOptions{Theme: t, Calendar: cal, Grass: flagGrass}); err != nil {
 			return err
 		}
 
@@ -94,7 +95,7 @@ func init() {
 	rootCmd.Flags().StringVar(&flagFrom, "from", "", "only contributions made at this time or later will be counted")
 	rootCmd.Flags().StringVar(&flagTo, "to", "", "only contributions made before and up to (including) this time will be counted")
 
-	rootCmd.Flags().StringVarP(&flagTheme, "theme", "t", "dark", fmt.Sprintf("grass theme (%s)", strings.Join(listThemes(), "|")))
+	rootCmd.Flags().StringVarP(&flagTheme, "theme", "t", "dark", fmt.Sprintf("grass theme (%s)", strings.Join(printer.ListThemes(), "|")))
 	rootCmd.Flags().StringVarP(&flagGrass, "grass", "g", "■", "grass string")
 	rootCmd.Flags().BoolVar(&flagTotal, "total", false, "print total contributions")
 }
