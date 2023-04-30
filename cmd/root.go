@@ -73,7 +73,11 @@ var rootCmd = &cobra.Command{
 			p.Printf("%d contributions in the last year\n", cal.TotalContributions)
 		}
 
-		if err := printer.PrintGrass(os.Stdout, printer.PrintOptions{Theme: t, Calendar: cal, Grass: flagGrass}); err != nil {
+		p := printer.New(&printer.Config{
+			Theme: t,
+			Grass: flagGrass,
+		})
+		if err := p.Print(os.Stdout, cal); err != nil {
 			return err
 		}
 
