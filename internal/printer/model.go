@@ -1,7 +1,6 @@
 package printer
 
 import (
-	"strings"
 	"time"
 
 	tea "github.com/charmbracelet/bubbletea"
@@ -13,12 +12,16 @@ var (
 )
 
 type model struct {
+	printer *Printer
+
 	index   int
 	grasses []string
 }
 
-func newModel(grasses []string) *model {
+func newModel(p *Printer, grasses []string) *model {
 	return &model{
+		printer: p,
+
 		index:   0,
 		grasses: grasses,
 	}
@@ -31,25 +34,7 @@ func (m *model) Init() tea.Cmd {
 }
 
 func (m *model) View() string {
-	var v strings.Builder
-
-	rows := 7
-
-	columns := (m.index + rows - 1) / rows
-	for r := 0; r < rows; r++ {
-		for c := 0; c < columns; c++ {
-			pos := c*rows + r
-			if pos < m.index {
-				if c > 0 {
-					v.WriteRune(' ')
-				}
-				v.WriteString(m.grasses[pos])
-			}
-		}
-		v.WriteRune('\n')
-	}
-
-	return v.String()
+	return m.printer.grasses(m.grasses, m.index)
 }
 
 type tickMsg struct{}
