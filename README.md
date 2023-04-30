@@ -85,14 +85,6 @@ $ gh grass --theme light
 
 ![](./assets/theme.gif)
 
-### Print Total Contributions
-
-```sh
-$ gh grass --total
-```
-
-![](./assets/total.gif)
-
 ### Custom Grass
 
 ```sh
@@ -102,6 +94,14 @@ $ gh grass --grass "●"
 ```
 
 ![](./assets/grass.gif)
+
+### Print Total Contributions
+
+```sh
+$ gh grass --total
+```
+
+![](./assets/total.gif)
 
 ## LICENSE
 
