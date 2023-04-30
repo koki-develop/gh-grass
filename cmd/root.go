@@ -16,12 +16,13 @@ import (
 )
 
 var (
-	flagUser  string
-	flagFrom  string
-	flagTo    string
-	flagTheme string
-	flagGrass string
-	flagTotal bool
+	flagUser    string
+	flagFrom    string
+	flagTo      string
+	flagTheme   string
+	flagGrass   string
+	flagAnimate bool
+	flagTotal   bool
 )
 
 var rootCmd = &cobra.Command{
@@ -74,8 +75,9 @@ var rootCmd = &cobra.Command{
 		}
 
 		p := printer.New(&printer.Config{
-			Theme: t,
-			Grass: flagGrass,
+			Theme:   t,
+			Grass:   flagGrass,
+			Animate: flagAnimate,
 		})
 		if err := p.Print(os.Stdout, cal); err != nil {
 			return err
@@ -101,5 +103,6 @@ func init() {
 
 	rootCmd.Flags().StringVarP(&flagTheme, "theme", "t", "dark", fmt.Sprintf("grass theme (%s)", strings.Join(printer.ListThemes(), "|")))
 	rootCmd.Flags().StringVarP(&flagGrass, "grass", "g", "■", "grass string")
+	rootCmd.Flags().BoolVarP(&flagAnimate, "animate", "a", false, "animate grass")
 	rootCmd.Flags().BoolVar(&flagTotal, "total", false, "print total contributions")
 }

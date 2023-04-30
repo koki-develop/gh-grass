@@ -9,19 +9,22 @@ import (
 )
 
 type Printer struct {
-	theme Theme
-	grass string
+	theme   Theme
+	grass   string
+	animate bool
 }
 
 type Config struct {
-	Theme Theme
-	Grass string
+	Theme   Theme
+	Grass   string
+	Animate bool
 }
 
 func New(cfg *Config) *Printer {
 	return &Printer{
-		theme: cfg.Theme,
-		grass: cfg.Grass,
+		theme:   cfg.Theme,
+		grass:   cfg.Grass,
+		animate: cfg.Animate,
 	}
 }
 
