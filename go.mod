@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/charmbracelet/bubbletea v0.23.2
 	github.com/charmbracelet/lipgloss v0.7.1
-	github.com/cli/go-gh v1.2.1
+	github.com/cli/go-gh/v2 v2.0.0
 	github.com/cli/shurcooL-graphql v0.0.3
 	github.com/jinzhu/now v1.1.5
 	github.com/mattn/go-runewidth v0.0.14

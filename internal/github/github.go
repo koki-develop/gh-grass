@@ -3,7 +3,7 @@ package github
 import (
 	"time"
 
-	"github.com/cli/go-gh"
+	"github.com/cli/go-gh/v2/pkg/api"
 	graphql "github.com/cli/shurcooL-graphql"
 )
 
@@ -37,7 +37,7 @@ type FetchCalendarParameters struct {
 }
 
 func FetchCalendar(params FetchCalendarParameters) (Calendar, error) {
-	client, err := gh.GQLClient(nil)
+	client, err := api.DefaultGraphQLClient()
 	if err != nil {
 		return Calendar{}, err
 	}
