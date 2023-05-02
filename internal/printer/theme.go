@@ -4,7 +4,7 @@ import "github.com/koki-develop/gh-grass/internal/github"
 
 type Theme map[github.ContributionLevel]string
 
-var Themes = map[string]Theme{
+var themes = map[string]Theme{
 	"dark": {
 		github.ContributionLevelNone:           "#161B22",
 		github.ContributionLevelFirstQuartile:  "#0E4429",
@@ -22,14 +22,14 @@ var Themes = map[string]Theme{
 }
 
 func GetTheme(name string) (Theme, bool) {
-	t, ok := Themes[name]
+	t, ok := themes[name]
 	return t, ok
 }
 
 func ListThemes() []string {
 	ts := []string{}
 
-	for t := range Themes {
+	for t := range themes {
 		ts = append(ts, t)
 	}
 
