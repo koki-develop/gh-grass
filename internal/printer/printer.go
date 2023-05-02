@@ -9,16 +9,17 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 	"github.com/koki-develop/gh-grass/internal/github"
+	"github.com/koki-develop/gh-grass/internal/theme"
 )
 
 type Printer struct {
-	theme   Theme
+	theme   theme.Theme
 	grass   string
 	animate bool
 }
 
 type Config struct {
-	Theme   Theme
+	Theme   theme.Theme
 	Grass   string
 	Animate bool
 }
@@ -32,7 +33,7 @@ func New(cfg *Config) *Printer {
 }
 
 type PrintOptions struct {
-	Theme    Theme
+	Theme    theme.Theme
 	Calendar github.Calendar
 	Grass    string
 }

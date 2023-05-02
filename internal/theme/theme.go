@@ -1,4 +1,4 @@
-package printer
+package theme
 
 import "github.com/koki-develop/gh-grass/internal/github"
 
@@ -21,12 +21,12 @@ var themes = map[string]Theme{
 	},
 }
 
-func GetTheme(name string) (Theme, bool) {
+func Get(name string) (Theme, bool) {
 	t, ok := themes[name]
 	return t, ok
 }
 
-func ListThemes() []string {
+func List() []string {
 	ts := []string{}
 
 	for t := range themes {
