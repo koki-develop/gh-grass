@@ -37,7 +37,7 @@ var rootCmd = &cobra.Command{
 			themeName = flagTheme
 		}
 
-		t, ok := printer.Themes[themeName]
+		theme, ok := printer.GetTheme(themeName)
 		if !ok {
 			return fmt.Errorf("valid themes: %s", printer.ListThemes())
 		}
@@ -75,7 +75,7 @@ var rootCmd = &cobra.Command{
 		}
 
 		p := printer.New(&printer.Config{
-			Theme:   t,
+			Theme:   theme,
 			Grass:   flagGrass,
 			Animate: flagAnimate,
 		})

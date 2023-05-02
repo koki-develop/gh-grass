@@ -21,6 +21,11 @@ var Themes = map[string]Theme{
 	},
 }
 
+func GetTheme(name string) (Theme, bool) {
+	t, ok := Themes[name]
+	return t, ok
+}
+
 func ListThemes() []string {
 	ts := []string{}
 
