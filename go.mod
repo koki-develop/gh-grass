@@ -3,7 +3,7 @@ module github.com/koki-develop/gh-grass
 go 1.20
 
 require (
-	github.com/charmbracelet/bubbletea v0.24.0
+	github.com/charmbracelet/bubbletea v0.24.2
 	github.com/charmbracelet/lipgloss v0.7.1
 	github.com/cli/go-gh/v2 v2.0.0
 	github.com/cli/shurcooL-graphql v0.0.3
