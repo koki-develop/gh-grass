@@ -9,7 +9,7 @@ require (
 	github.com/cli/shurcooL-graphql v0.0.3
 	github.com/jinzhu/now v1.1.5
 	github.com/mattn/go-runewidth v0.0.14
-	github.com/spf13/cobra v1.7.0
+	github.com/spf13/cobra v1.8.0
 	golang.org/x/text v0.9.0
 )
 
