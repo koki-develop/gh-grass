@@ -1,12 +1,14 @@
 module github.com/koki-develop/gh-grass
 
-go 1.20
+go 1.21
+
+toolchain go1.21.4
 
 require (
 	github.com/charmbracelet/bubbletea v0.24.0
 	github.com/charmbracelet/lipgloss v0.7.1
 	github.com/cli/go-gh/v2 v2.0.0
-	github.com/cli/shurcooL-graphql v0.0.3
+	github.com/cli/shurcooL-graphql v0.0.4
 	github.com/jinzhu/now v1.1.5
 	github.com/mattn/go-runewidth v0.0.14
 	github.com/spf13/cobra v1.7.0
